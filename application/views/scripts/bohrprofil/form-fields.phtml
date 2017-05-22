@@ -1,0 +1,156 @@
+<input type="hidden" name="bohrung_id"
+       value="<?php echo empty($this->bohrung_id) ? $this->bohrprofil['bohrung_id'] : $this->bohrung_id ?>" />
+
+<div class="row">
+    <div class="span6">
+        <label for="bohrprofil-datum">Datum des Bohrprofils [JJJJ-MM-TT]</label>
+        <input type="text" name="datum" id="bohrprofil-datum"
+               value="<?php echo $this->escape($this->bohrprofil['datum']) ?>" />
+
+        <label for="bohrprofil-bemerkung">Bemerkungen zum Bohrprofil</label>
+        <textarea name="bemerkung" id="bohrprofil-bemerkung"><?php echo $this->bohrprofil['bemerkung'] ?></textarea>
+
+        <label for="bohrprofil-kote">Terrainkote der Bohrung [m]</label>
+        <input type="text" name="kote" id="bohrprofil-kote"
+               value="<?php echo $this->escape($this->bohrprofil['kote']) ?>" />
+
+        <label for="bohrprofil-endteufe">Endtiefe der Bohrung [m]</label>
+        <input type="text" name="endteufe" id="bohrprofil-endteufe"
+               value="<?php echo $this->escape($this->bohrprofil['endteufe']) ?>" />
+
+        <label for="bohrprofil-tektonik">Klassierung Tektonik</label>
+        <?php echo $this->formSelect('tektonik', $this->bohrprofil['tektonik'], array('id' => 'bohrung-tektonik'), $this->tektonikOptions); ?>
+
+        <label for="bohrprofil-fmfelso">Formation Fels</label>
+        <?php echo $this->formSelect('fmfelso', $this->bohrprofil['fmfelso'], array('id' => 'bohrung-fmfelso'), $this->fmfelsoOptions); ?>
+
+        <label for="bohrprofil-fmeto">Formation Endtiefe</label>
+        <?php echo $this->formSelect('fmeto', $this->bohrprofil['fmeto'], array('id' => 'bohrung-fmeto'), $this->fmetoOptions); ?>
+
+        <label for="bohrprofil-quali">Qualität der Angaben zur Bohrung</label>
+        <?php echo $this->formSelect('quali', $this->bohrprofil['quali'], array('id' => 'bohrung-quali'), $this->qualiOptions); ?>
+
+        <label for="bohrprofil-qualibem">Bemerkung zur Qualitätsangabe</label>
+        <textarea name="qualibem" id="bohrprofil-qualibem"><?php echo $this->bohrprofil['qualibem'] ?></textarea>
+
+    </div>
+    <div class="span6">
+
+        <label for="bohrprofil-x_koordinate">Northing</label>
+        <input type="text" name="x_koordinate" id="bohrprofil-x_koordinate"
+               value="<?php echo $this->escape($this->bohrprofil['x_koordinate']) ?>" />
+
+        <label for="bohrprofil-y_koordinate">Easting</label>
+        <input type="text" name="y_koordinate" id="bohrprofil-y_koordinate"
+               value="<?php echo $this->escape($this->bohrprofil['y_koordinate']) ?>" />
+
+        <div id="map"></div>
+
+        <p></p>
+
+        <label for="bohrprofil-archive">Archiviert</label>
+        <input type="checkbox" name="archive" id="bohrprofil-archive" value="1"
+               <?php if ($this->bohrprofil['archive']) echo 'checked' ?> />
+    </div>
+</div>
+
+<h3>Schichten</h3>
+
+<div class="row">
+    <div class="span12">
+        <table id="bohrprofil-schichten-table">
+            <tr>
+                <th>Tiefe</th>
+                <th>Schicht</th>
+                <th>Bemerkung zur Schicht</th>
+                <th>Qualität</th>
+                <th>Bemkerung zur Qualitätsangabe</th>
+                <th></th>
+            </tr>
+            <?php
+            if (is_array($this->bohrprofil['schichten'])) {
+                foreach($this->bohrprofil['schichten'] as $index => $schicht) {
+                    $params = array(
+                        'index' => $index,
+                        'schicht' => $schicht,
+                        'schichtOptions' => $this->schichtOptions,
+                        'schichtQualiOptions' => $this->schichtQualiOptions,
+                    );
+                    echo $this->partial('schicht/form-fields.phtml', $params);
+                }
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
+<p><a class="btn" href="#" id="bohrprofil-schichten-add">Schicht hinzufügen</a></p>
+
+<table id="bohrprofil-schichten-template"  style="display:none">
+<?php echo $this->partial('schicht/form-fields.phtml', array(
+    'schichtOptions' => $this->schichtOptions,
+    'schichtQualiOptions' => $this->schichtQualiOptions,
+)); ?>
+</table>
+
+<h3>Vorkommnisse</h3>
+
+<div class="row">
+    <div class="span12">
+        <table id="bohrprofil-vorkommnisse-table">
+            <tr>
+                <th>Tiefe</th>
+                <th>Typ</th>
+                <th>Subtyp</th>
+                <th>Bemerkung zum Vorkomnis</th>
+                <th>Qualität</th>
+                <th>Bemerkung zur Qualitätsangabe</th>
+                <th></th>
+            </tr>
+            <?php
+            if (is_array($this->bohrprofil['vorkommnisse'])) {
+                foreach($this->bohrprofil['vorkommnisse'] as $index => $vorkommnis) {
+                    $params = array(
+                        'index' => $index,
+                        'vorkommnis' => $vorkommnis,
+                        'vorkommnisTypOptions' => $this->vorkommnisTypOptions,
+                        'vorkommnisSubtypOptions' => $this->vorkommnisSubtypOptions,
+                        'vorkommnisQualiOptions' => $this->vorkommnisQualiOptions,
+                    );
+                    echo $this->partial('vorkommnis/form-fields.phtml', $params);
+                }
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
+<p><a class="btn" href="#" id="bohrprofil-vorkommnisse-add">Vorkommnis hinzufügen</a></p>
+
+<table id="bohrprofil-vorkommnisse-template"  style="display:none">
+<?php echo $this->partial('vorkommnis/form-fields.phtml', array(
+    'vorkommnisTypOptions' => $this->vorkommnisTypOptions,
+    'vorkommnisSubtypOptions' => $this->vorkommnisSubtypOptions,
+    'vorkommnisQualiOptions' => $this->vorkommnisQualiOptions,
+)); ?>
+</table>
+
+<p><a class="btn" href="#" id="bohrprofil-submit">speichern</a></p>
+
+<script type="text/javascript">
+(function(){
+
+    $('#bohrprofil-submit').click(function() {
+        $('#bohrprofil-schichten-template').remove();
+        $('#bohrprofil-vorkommnisse-template').remove();
+        $('#bohrprofil-form').submit();
+        return false;
+    });
+
+    var map = new Bodo.Map();
+    map.editGeometry('#bohrprofil-x_koordinate', '#bohrprofil-y_koordinate');
+
+    Bodo.initializeGrid('bohrprofil-schichten');
+    Bodo.initializeGrid('bohrprofil-vorkommnisse');
+})();
+</script>

@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="span2">
+        <h2 style="margin-top: 15px;">Standorte</h2>
+    </div>
+    <div class="span2">
+        <label for="standorte-standort_id">Standort ID</label>
+        <input type="text" id="standorte-standort_id" style="width: 100px" />
+    </div>
+    <div class="span3">
+        <label for="standorte-bezeichnung">Standort Bezeichnung</label>
+        <input type="text" id="standorte-bezeichnung" style="width: 200px" />
+    </div>
+    <div class="span3">&MediumSpace;
+        <img src="<?php echo ROOT_DIR ?>img/spinner.gif" style="margin-top: 25px; display: none;" id="standorte-spinner" />
+    </div>
+    <div class="span2">
+        <a class="btn" href="<?php echo ROOT_DIR ?>standort/new" style="margin-top: 20px;">Standort erstellen</a>
+    </div>
+</div>
+
+<ul class="bodo-list" id="standorte-list">
+    <?php echo $this->partial('standort/list.phtml', $this); ?>
+</ul>
+
+<script type="text/javascript">
+(function(){
+    $('#standorte-standort_id, #standorte-bezeichnung').keyup(function() {
+        $.ajax({
+            url: '<?php echo ROOT_DIR ?>standort/list',
+            data: {
+                standort_id: $('#standorte-standort_id').val(),
+                bezeichnung: $('#standorte-bezeichnung').val()
+            },
+            beforeSend: function() {
+                $('#standorte-spinner').show();
+            },
+            complete: function() {
+                $('#standorte-spinner').hide();
+            },
+            success: function(response) {
+                $('#standorte-list').html(response);
+            }
+        });
+    });
+})();
+</script>

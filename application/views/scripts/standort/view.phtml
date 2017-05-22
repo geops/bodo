@@ -1,0 +1,235 @@
+<div class="row">
+
+    <div class="span12">
+        <h2>Standort</h2>
+        <a class="btn" href="edit?standort_id=<?php echo $this->standort['standort_id'] ?>">bearbeiten</a>
+        <a class="btn" href="remove?standort_id=<?php echo $this->standort['standort_id'] ?>">löschen</a>
+        <a class="btn" href="<?php echo ROOT_DIR ?>bohrung/new?standort_id=<?php echo $this->standort['standort_id'] ?>">Bohrung erstellen</a>
+        <?php echo $this->partial('partial/new-mut.phtml', array(
+            'new_date' => $this->standort['new_date'],
+            'mut_date' => $this->standort['mut_date'],
+            'new_usr' => $this->standort['new_usr'],
+            'mut_usr' => $this->standort['mut_usr'],
+        )); ?>
+    </div>
+
+    <div class="span6">
+        <dl>
+            <dt>Bezeichnung</dt>
+            <dd><?php echo empty($this->standort['bezeichnung']) ? '-' : $this->standort['bezeichnung'] ?></dd>
+            <dt>Bemerkung</dt>
+            <dd><?php echo empty($this->standort['bemerkung']) ? '-' : $this->standort['bemerkung'] ?></dd>
+            <dt>Anzahl Bohrlöcher</dt>
+            <dd><?php echo empty($this->standort['anzbohrloch']) ? '-' : $this->standort['anzbohrloch'] ?></dd>
+            <dt>Gembfs</dt>
+            <dd><?php echo empty($this->standort['gembfs']) ? '-' : $this->standort['gembfs'] ?></dd>
+            <dt>GB Nummer</dt>
+            <dd><?php echo empty($this->standort['gbnummer']) ? '-' : $this->standort['gbnummer'] ?></dd>
+            <dt>GASO Nummer</dt>
+            <dd><?php echo empty($this->standort['gaso_nr']) ? '-' : $this->standort['gaso_nr'] ?></dd>
+            <dt>Qualität</dt>
+            <dd><?php echo empty($this->standort['quali_text']) ? '-' : $this->standort['quali_text'] ?></dd>
+            <dt>Bemerkung zur Qualität</dt>
+            <dd><?php echo empty($this->standort['qualibem']) ? '-' : $this->standort['qualibem'] ?></dd>
+        </dl>
+    </div>
+    <div class="span6">
+        <div id="map"></div>
+    </div>
+</div>
+
+<h3>Bohrungen</h3>
+<ul class="nav nav-tabs">
+    <?php foreach ($this->bohrungen as $index => $bohrung) { ?>
+    <li class="<?php if ($index == 0) echo 'active' ?>">
+        <a href="#bohrung-<?php echo $bohrung['bohrung_id'] ?>" data-toggle="tab"><?php echo $bohrung['bohrung_id'] ?></a>
+    </li>
+    <?php } ?>
+</ul>
+<div class="tab-content">
+    <?php if (count($this->bohrungen) == 0) { ?>
+    <p>Keine Bohrungen vorhanden.</p>
+    <?php } ?>
+    <?php foreach ($this->bohrungen as $index => $bohrung) { ?>
+    <div class="tab-pane <?php if ($index == 0) echo 'active' ?>" id="bohrung-<?php echo $bohrung['bohrung_id'] ?>">
+        <div class="row">
+            <div class="span12">
+                <a class="btn" href="<?php echo ROOT_DIR ?>bohrung/edit?bohrung_id=<?php echo $bohrung['bohrung_id'] ?>">bearbeiten</a>
+                <a class="btn" href="<?php echo ROOT_DIR ?>bohrung/remove?bohrung_id=<?php echo $bohrung['bohrung_id'] ?>">löschen</a>
+                <a class="btn" href="<?php echo ROOT_DIR ?>bohrprofil/new?bohrung_id=<?php echo $bohrung['bohrung_id'] ?>">Bohrprofil erstellen</a>
+                <?php echo $this->partial('partial/new-mut.phtml', array(
+                    'new_date' => $bohrung['new_date'],
+                    'mut_date' => $bohrung['mut_date'],
+                    'new_usr' => $bohrung['new_usr'],
+                    'mut_usr' => $bohrung['mut_usr'],
+                )); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <dl>
+                    <dt>Bezeichnung der Bohrung</dt>
+                    <dd><?php echo empty($bohrung['bezeichnung']) ? '-' : $bohrung['bezeichnung'] ?></dd>
+                    <dt>Bemerkungen zur Bohrung</dt>
+                    <dd><?php echo empty($bohrung['bemerkung']) ? '-' : $bohrung['bemerkung'] ?></dd>
+                    <dt>Datum des Bohrbeginns</dt>
+                    <dd><?php echo empty($bohrung['datum']) ? '-' : $bohrung['datum'] ?></dd>
+                    <dt>Besitzer der Bohrung</dt>
+                    <dd><?php echo empty($bohrung['besitzer']) ? '-' : $bohrung['besitzer'] ?></dd>
+                    <dt>Durchmesser der Bohrlöcher [mm]</dt>
+                    <dd><?php echo empty($bohrung['durchmesserbohrloch']) ? '-' : $bohrung['durchmesserbohrloch'] ?></dd>
+                    <dt>Art der Bohrung</dt>
+                    <dd><?php echo empty($bohrung['bohrart_text']) ? '-' : $bohrung['bohrart_text'] ?></dd>
+                    <dt>Zweck der Bohrung</dt>
+                    <dd><?php echo empty($bohrung['bohrzweck_text']) ? '-' : $bohrung['bohrzweck_text'] ?></dd>
+                </dl>
+            </div>
+            <div class="span6">
+                <dl>
+                    <dt>Klassierung der Ablenkung</dt>
+                    <dd><?php echo empty($bohrung['ablenkung_text']) ? '-' : $bohrung['ablenkung_text'] ?></dd>
+                    <dt>Bemerkung zu Ablenkung</dt>
+                    <dd><?php echo empty($bohrung['ablenkungbem']) ? '-' : $bohrung['ablenkungbem'] ?></dd>
+                    <dt>Qualität der Angaben zur Bohrung</dt>
+                    <dd><?php echo empty($bohrung['quali_text']) ? '-' : $bohrung['quali_text'] ?></dd>
+                    <dt>Bemerkung zur Qualitätsangabe</dt>
+                    <dd><?php echo empty($bohrung['qualibem']) ? '-' : $bohrung['qualibem'] ?></dd>
+                    <dt>Autor geol. Aufnahme (Firma, Bearbeiter, Jahr)</dt>
+                    <dd><?php echo empty($bohrung['quelleref']) ? '-' : $bohrung['quelleref'] ?></dd>
+                    <dt>Pfad zur Ablage der gescannten Bohrungsprofile etc</dt>
+                    <dd><?php echo empty($bohrung['hotlinka']) ? '-' : $bohrung['hotlinka'] ?></dd>
+                    <dt>Dateiname des gescannten Bohrungsprofile u. Dokumente</dt>
+                    <dd><a href="<?php echo ROOT_DIR; ?>/documents/<?php echo empty($bohrung['hotlinkf']) ? '-' : $bohrung['hotlinkf'] ?>">
+                    <?php echo empty($bohrung['hotlinkf']) ? '-' : $bohrung['hotlinkf'] ?></a> </dd>
+                </dl>
+            </div>
+        </div>
+        <h3>Bohrprofile</h3>
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs">
+                <?php foreach ($bohrung['bohrprofile'] as $bohrprofil) { ?>
+                <li class="<?php echo $bohrprofil['archive'] ? 'bodo-archive' : 'active' ?>">
+                    <a href="#bohrprofil-<?php echo $bohrprofil['bohrprofil_id'] ?>" data-toggle="tab">Profil <?php echo $bohrprofil['bohrprofil_id'] ?></a>
+                </li>
+                <?php } ?>
+            </ul>
+            <div class="tab-content">
+                <?php if (empty($bohrung['bohrprofile'])) { ?>
+                <p>Keine Bohrprofile vorhanden.</p>
+                <?php } ?>
+                <?php foreach ($bohrung['bohrprofile'] as $bohrprofil) { ?>
+                <div class="tab-pane <?php if (!$bohrprofil['archive']) echo 'active' ?>" id="bohrprofil-<?php echo $bohrprofil['bohrprofil_id'] ?>">
+                    <div class="row">
+                        <div class="span10">
+                            <a class="btn" href="<?php echo ROOT_DIR ?>bohrprofil/edit?bohrprofil_id=<?php echo $bohrprofil['bohrprofil_id'] ?>">bearbeiten</a>
+                            <a class="btn" href="<?php echo ROOT_DIR ?>bohrprofil/clone?bohrprofil_id=<?php echo $bohrprofil['bohrprofil_id'] ?>">klonen</a>
+                            <?php if ($bohrprofil['archive']) { ?>
+                            <a class="btn" href="<?php echo ROOT_DIR ?>bohrprofil/remove?bohrprofil_id=<?php echo $bohrprofil['bohrprofil_id'] ?>">löschen</a>
+                            <?php } ?>
+                            <?php echo $this->partial('partial/new-mut.phtml', array(
+                                'new_date' => $bohrprofil['new_date'],
+                                'mut_date' => $bohrprofil['mut_date'],
+                                'new_usr' => $bohrprofil['new_usr'],
+                                'mut_usr' => $bohrprofil['mut_usr'],
+                            )); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span5">
+                            <dl>
+                                <dt>Datum des Bohrprofils</dt>
+                                <dd><?php echo empty($bohrprofil['datum']) ? '-' : $bohrprofil['datum'] ?></dd>
+                                <dt>Bemerkung zum Bohrprofil</dt>
+                                <dd><?php echo empty($bohrprofil['bemerkung']) ? '-' : $bohrprofil['bemerkung'] ?></dd>
+                                <dt>Terrainkote der Bohrung [m]</dt>
+                                <dd><?php echo empty($bohrprofil['kote']) ? '-' : $bohrprofil['kote'] ?></dd>
+                                <dt>Endtiefe der Bohrung [m]</dt>
+                                <dd><?php echo empty($bohrprofil['endteufe']) ? '-' : $bohrprofil['endteufe'] ?></dd>
+                                <?php if ($bohrprofil['archive']) { ?>
+                                <dt>Archiviert am</dt>
+                                <dd><?php echo date('d.m.Y G:i', strtotime($bohrprofil['archive_date'])) ?></dd>
+                                <?php } ?>
+                            </dl>
+                        </div>
+                        <div class="span5">
+                            <dl>
+                                <dt>Klassierung Tektonik</dt>
+                                <dd><?php echo empty($bohrprofil['tektonik_text']) ? '-' : $bohrprofil['tektonik_text'] ?></dd>
+                                <dt>Formation Fels</dt>
+                                <dd><?php echo empty($bohrprofil['fmfelso_text']) ? '-' : $bohrprofil['fmfelso_text'] ?></dd>
+                                <dt>Formation Endtiefe</dt>
+                                <dd><?php echo empty($bohrprofil['fmeto_text']) ? '-' : $bohrprofil['fmeto_text'] ?></dd>
+                                <dt>Qualität der Angaben zum Bohrprofil</dt>
+                                <dd><?php echo empty($bohrprofil['quali_text']) ? '-' : $bohrprofil['quali_text'] ?></dd>
+                                <dt>Bemerkung zur Qualitätsangabe</dt>
+                                <dd><?php echo empty($bohrprofil['qualibem']) ? '-' : $bohrprofil['qualibem'] ?></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <h3>Schichten</h3>
+                    <div class="row">
+                        <div class="span10">
+                            <table>
+                                <tr>
+                                    <th>Tiefe</th>
+                                    <th>Schicht</th>
+                                    <th>Bemerkung zur Schicht</th>
+                                    <th>Qualität</th>
+                                    <th>Bemerkung zur Qualitätsangabe</th>
+                                </tr>
+                                <?php foreach ($bohrprofil['schichten'] as $schicht) { ?>
+                                <tr>
+                                    <td><?php echo is_numeric($schicht['tiefe']) ? $schicht['tiefe'] : '-' ?></td>
+                                    <td style="white-space: nowrap;"><?php echo empty($schicht['schicht_text']) ? '-' : $schicht['schicht_text'] ?></td>
+                                    <td><?php echo empty($schicht['bemerkung']) ? '-' : $schicht['bemerkung'] ?></td>
+                                    <td style="white-space: nowrap;"><?php echo empty($schicht['quali_text']) ? '-' : $schicht['quali_text'] ?></td>
+                                    <td><?php echo empty($schicht['qualibem']) ? '-' : $schicht['qualibem'] ?></td>
+                                </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
+                    <p></p>
+                    <h3>Vorkommnisse</h3>
+                    <div class="row">
+                        <div class="span10">
+                            <table>
+                                <tr>
+                                    <th>Tiefe</th>
+                                    <th>Typ</th>
+                                    <th>Subyp</th>
+                                    <th>Bemerkung zum Vorkomnis</th>
+                                    <th>Qualität</th>
+                                    <th>Bemerkung zur Qualitätsangabe</th>
+                                </tr>
+                                <?php foreach ($bohrprofil['vorkommnisse'] as $vorkommnis) { ?>
+                                <tr>
+                                    <td><?php echo is_numeric($vorkommnis['tiefe']) ? $vorkommnis['tiefe'] : '-' ?></td>
+                                    <td style="white-space: nowrap;"><?php echo empty($vorkommnis['typ_text']) ? '-' : $vorkommnis['typ_text'] ?></td>
+                                    <td style="white-space: nowrap;"><?php echo empty($vorkommnis['subtyp_text']) ? '-' : $vorkommnis['subtyp_text'] ?></td>
+                                    <td><?php echo empty($vorkommnis['bemerkung']) ? '-' : $vorkommnis['bemerkung'] ?></td>
+                                    <td style="white-space: nowrap;"><?php echo empty($vorkommnis['quali_text']) ? '-' : $vorkommnis['quali_text'] ?></td>
+                                    <td><?php echo empty($vorkommnis['qualibem']) ? '-' : $vorkommnis['qualibem'] ?></td>
+                                </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+</div>
+
+<script type="text/javascript">
+(function(){
+    var map = new Bodo.Map();
+    map.addGeometry(<?php echo json_encode($this->standort['wkt_geometry']) ?>);
+    map.setCenter(map.standortLayer.getDataExtent().getCenterLonLat(), 7);
+    <?php foreach($this->bohrungen as $bohrung) { foreach ($bohrung['bohrprofile'] as $bohrprofil) { ?>
+    map.addGeometry(<?php echo json_encode($bohrprofil['wkt_geometry']) ?>);
+    <?php } } ?>
+})();
+</script>

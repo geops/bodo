@@ -1,0 +1,35 @@
+<tr>
+    <td>
+        <input type="hidden" name="vorkommnisse[<?php echo $this->index ?>][delete]"
+               value="<?php echo isset($this->vorkommnis['delete']) ? $this->vorkommnis['delete'] : '' ?>" />
+        <input type="hidden" name="vorkommnisse[<?php echo $this->index ?>][vorkommnis_id]"
+               value="<?php echo $this->vorkommnis['vorkommnis_id'] ?>" />
+        <input type="text" style="width: 50px" name="vorkommnisse[<?php echo $this->index ?>][tiefe]"
+               value="<?php echo $this->escape($this->vorkommnis['tiefe']) ?>" />
+    </td>
+    <td>
+        <?php echo $this->formSelect('vorkommnisse[' . $this->index . '][typ]', $this->vorkommnis['typ'],
+                array('style' => 'width: 90px'), $this->vorkommnisTypOptions); ?>
+    </td>
+    <td>
+        <?php echo $this->formSelect('vorkommnisse[' . $this->index . '][subtyp]', $this->vorkommnis['subtyp'],
+                array('style' => 'width: 90px'), $this->vorkommnisSubtypOptions); ?>
+    </td>
+    <td>
+        <input style="width: 250px" type="text" name="vorkommnisse[<?php echo $this->index ?>][bemerkung]"
+               value="<?php echo $this->escape($this->vorkommnis['bemerkung']) ?>" />
+    </td>
+    <td>
+        <?php echo $this->formSelect('vorkommnisse[' . $this->index . '][quali]', $this->vorkommnis['quali'],
+                array('style' => 'width: 100px'), $this->vorkommnisQualiOptions); ?>
+    </td>
+    <td>
+        <input style="width: 250px" type="text" name="vorkommnisse[<?php echo $this->index ?>][qualibem]"
+               value="<?php echo $this->escape($this->vorkommnis['qualibem']) ?>" />
+    </td>
+    <td>
+        <ul class="bodo-icons">
+            <li class="icon-remove bohrprofil-schichten-remove"></li>
+        </ul>
+    </td>
+</tr>

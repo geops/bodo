@@ -1,0 +1,10 @@
+<h2>Bohrung bearbeiten</h2>
+
+<form action="<?php echo ROOT_DIR ?>bohrung/update" id ="bohrung-form">
+
+    <input type="hidden" name="bohrung_id"
+           value="<?php echo $this->escape($this->bohrung['bohrung_id']) ?>" />
+
+    <?php echo $this->partial('bohrung/form-fields.phtml', $this); ?>
+
+</form>

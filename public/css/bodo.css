@@ -1,0 +1,55 @@
+body {
+    padding-top: 60px;
+}
+
+input, textarea {
+    width: 400px;
+}
+
+th, td {
+    padding: 0 10px;
+}
+
+select {
+    width: 410px;
+}
+
+#map {
+    height: 300px;
+}
+
+.bodo-hint {
+    margin: 5px 0 0 10px;
+    color: grey;
+    display: inline;
+}
+
+.bodo-footer {
+    text-align: center;
+    color: grey;
+    margin: 20px 0;
+    padding: 10px 0;
+    border-top: 1px solid lightgray;
+}
+
+.bodo-icons {
+    margin: 0;
+}
+
+.bodo-icons li {
+    cursor: pointer;
+}
+
+.bodo-archive a {
+    background-color: #ddd;
+}
+
+.bodo-list {
+    list-style: none;
+    margin: 10px 0 0;
+}
+
+.bodo-list li {
+    border-top: 1px solid lightgray;
+    padding: 5px 0;
+}

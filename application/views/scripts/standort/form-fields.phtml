@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="span6">
+        <label for="standort-bezeichnung">Bezeichnung des Standorts</label>
+        <input type="text" name="bezeichnung" id="standort-bezeichnung"
+               value="<?php echo $this->escape($this->standort['bezeichnung']) ?>" />
+
+        <label for="standort-bemerkung">Bemerkungen zum Standort</label>
+        <textarea name="bemerkung" id="standort-bemerkung"><?php echo $this->standort['bemerkung'] ?></textarea>
+
+        <label for="standort-anzbohrloch">Anzahl Bohrlöcher</label>
+        <input type="text" name="anzbohrloch" id="standort-anzbohrloch"
+               value="<?php echo $this->escape($this->standort['anzbohrloch']) ?>" />
+
+        <label for="standort-gembfs">Gemeinde-Nr.</label>
+        <input type="text" name="gembfs" id="standort-gembfs"
+               value="<?php echo $this->escape($this->standort['gembfs']) ?>" />
+
+        <label for="standort-gbnummer">Grundbuch-Nr.</label>
+        <input type="text" name="gbnummer" id="standort-gbnummer"
+               value="<?php echo $this->escape($this->standort['gbnummer']) ?>" />
+
+        <label for="standort-gaso_nr">Gaso-Nr.</label>
+        <input type="text" name="gaso_nr" id="standort-gaso_nr"
+               value="<?php echo $this->escape($this->standort['gaso_nr']) ?>" />
+
+        <label for="standort-quali">Qualität der Stammdaten</label>
+        <?php echo $this->formSelect('quali', $this->standort['quali'], array('id' => 'standort-quali'), $this->qualiOptions); ?>
+
+        <label for="standort-qualibem">Bemerkung zur Qualitätsangabe</label>
+        <textarea name="qualibem" id="standort-qualibem"><?php echo $this->standort['qualibem'] ?></textarea>
+    </div>
+    <div class="span6">
+
+        <label for="standort-x_koordinate">Northing</label>
+        <input type="text" name="x_koordinate" id="standort-x_koordinate"
+               value="<?php echo $this->escape($this->standort['x_koordinate']) ?>" />
+
+        <label for="standort-y_koordinate">Easting</label>
+        <input type="text" name="y_koordinate" id="standort-y_koordinate"
+               value="<?php echo $this->escape($this->standort['y_koordinate']) ?>" />
+
+        <div id="map"></div>
+    </div>
+</div>
+
+<a class="btn" href="#" id="standort-submit">speichern</a>
+
+<script type="text/javascript">
+(function(){
+    $('#standort-submit').click(function() {
+        $('#standort-form').submit();
+        return false;
+    });
+    var map = new Bodo.Map();
+    map.editGeometry('#standort-x_koordinate', '#standort-y_koordinate');
+})();
+</script>

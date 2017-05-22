@@ -1,0 +1,67 @@
+<input type="hidden" name="standort_id"
+       value="<?php echo empty($this->standort_id) ? $this->bohrung['standort_id'] : $this->standort_id ?>" />
+
+<div class="row">
+    <div class="span6">
+        <label for="bohrung-bezeichnung">Bezeichnung der Bohrung</label>
+        <input type="text" name="bezeichnung" id="bohrung-bezeichnung"
+               value="<?php echo $this->escape($this->bohrung['bezeichnung']) ?>" />
+
+        <label for="bohrung-bemerkung">Bemerkungen zur Bohrung</label>
+        <textarea name="bemerkung" id="bohrung-bemerkung"><?php echo $this->bohrung['bemerkung'] ?></textarea>
+
+        <label for="bohrung-datum">Datum des Bohrbeginns [JJJJ-MM-TT]</label>
+        <input type="text" name="datum" id="bohrung-datum"
+               value="<?php echo $this->escape($this->bohrung['datum']) ?>" />
+
+        <label for="bohrung-besitzer">Besitzer der Bohrung</label>
+        <input type="text" name="besitzer" id="bohrung-besitzer"
+               value="<?php echo $this->escape($this->bohrung['besitzer']) ?>" />
+
+        <label for="bohrung-durchmesserbohrloch">Durchmesser der Bohrlöcher [mm]</label>
+        <input type="text" name="durchmesserbohrloch" id="bohrung-durchmesserbohrloch"
+               value="<?php echo $this->escape($this->bohrung['durchmesserbohrloch']) ?>" />
+
+        <label for="bohrung-bohrart">Art der Bohrung</label>
+        <?php echo $this->formSelect('bohrart', $this->bohrung['bohrart'], array('id' => 'bohrung-bohrart'), $this->bohrartOptions); ?>
+
+        <label for="bohrung-bohrzweck">Zweck der Bohrung</label>
+        <?php echo $this->formSelect('bohrzweck', $this->bohrung['bohrzweck'], array('id' => 'bohrung-bohrzweck'), $this->bohrzweckOptions); ?>
+    </div>
+    <div class="span6">
+        <label for="bohrung-ablenkung">Klassierung der Ablenkung</label>
+        <?php echo $this->formSelect('ablenkung', $this->bohrung['ablenkung'], array('id' => 'bohrung-ablenkung'), $this->ablenkungOptions); ?>
+
+        <label for="bohrung-ablenkungbem">Bemerkung zur Ablenkung</label>
+        <textarea name="ablenkungbem" id="bohrung-ablenkungbem"><?php echo $this->bohrung['ablenkungbem'] ?></textarea>
+
+        <label for="bohrung-quali">Qualität der Angaben zur Bohrung</label>
+        <?php echo $this->formSelect('quali', $this->bohrung['quali'], array('id' => 'bohrung-quali'), $this->qualiOptions); ?>
+
+        <label for="bohrung-qualibem">Bemerkung zur Qualitätsangabe</label>
+        <textarea name="qualibem" id="bohrung-qualibem"><?php echo $this->bohrung['qualibem'] ?></textarea>
+
+        <label for="bohrung-quelleref">Autor geol. Aufnahme (Firma, Bearbeiter, Jahr)</label>
+        <input type="text" name="quelleref" id="bohrung-qualiref"
+               value="<?php echo $this->escape($this->bohrung['quelleref']) ?>" />
+
+        <label for="bohrung-hotlinka">Pfad zur Ablage der gescannten Bohrungsprofile etc</label>
+        <input type="text" name="hotlinka" id="bohrung-hotlinka"
+               value="<?php echo $this->escape($this->bohrung['hotlinka']) ?>" />
+
+        <label for="bohrung-hotlinkf">Dateiname des gescannten Bohrungsprofile u. Dokumente</label>
+        <input type="text" name="hotlinkf" id="bohrung-hotlinkf"
+               value="<?php echo $this->escape($this->bohrung['hotlinkf']) ?>" />
+    </div>
+</div>
+
+<a class="btn" href="#" id="bohrung-submit">speichern</a>
+
+<script type="text/javascript">
+(function(){
+    $('#bohrung-submit').click(function() {
+        $('#bohrung-form').submit();
+        return false;
+    });
+})();
+</script>

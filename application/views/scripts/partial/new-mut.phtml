@@ -1,0 +1,6 @@
+<div class="bodo-hint">
+    erstellt am <?php echo date('d.m.Y G:i', strtotime($this->new_date)) ?> von <?php echo $this->new_usr ?>
+    <?php if (!empty($this->mut_date)) { ?> |
+    aktualisiert am  <?php echo date('d.m.Y G:i', strtotime($this->mut_date)) ?> von <?php echo $this->mut_usr ?>
+    <?php } ?>
+</div>

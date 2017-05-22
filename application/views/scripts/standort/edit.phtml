@@ -1,0 +1,9 @@
+<h2>Standort bearbeiten</h2>
+
+<form action="update" id="standort-form">
+
+    <input type="hidden" name="standort_id" value="<?php echo $this->escape($this->standort['standort_id']) ?>" />
+
+    <?php echo $this->partial('standort/form-fields.phtml', $this); ?>
+
+</form>

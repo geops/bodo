@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>Bodo</title>
+        <?php if (ini_get("display_errors")) : // use src css ?>
+        <link href="<?php echo ROOT_DIR ?>css/bootstrap.css" rel="stylesheet">
+        <link href="<?php echo ROOT_DIR ?>css/bodo.css" rel="stylesheet">
+        <link href="<?php echo ROOT_DIR ?>css/openlayers.css" rel="stylesheet">
+        <script src="<?php echo ROOT_DIR ?>js/openlayers/OpenLayers.js" type="text/javascript"></script>
+        <script src="<?php echo ROOT_DIR ?>js/jquery.js" type="text/javascript"></script>
+        <script src="<?php echo ROOT_DIR ?>js/bodo.js" type="text/javascript"></script>
+        <script src="<?php echo ROOT_DIR ?>js/bootstrap.js" type="text/javascript"></script>
+        <?php else : // use compressed css ?>
+        <link href="<?php echo ROOT_DIR; ?>css/style.css" rel="stylesheet">
+        <script src="<?php echo ROOT_DIR ?>js/script.js" type="text/javascript"></script>
+        <?php endif; ?>
+        <script type="text/javascript">
+        OpenLayers.ImgPath = '<?php echo ROOT_DIR ?>js/openlayers/img/';
+        </script>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="<?php echo ROOT_DIR; ?>">Bodo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <?php foreach ($this->messages as $message) { ?>
+                <div class="span12 alert alert-<?php echo $message['type'] ?>">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <?php echo $message['text'] ?>
+                </div>
+                <?php } ?>
+            </div>
+
+            <?php echo $this->layout()->content; ?>
+
+            <div class="row">
+                <div class="bodo-footer">
+                    Bodo <?php echo APPLICATION_RELEASE ?>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

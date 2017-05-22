@@ -1,0 +1,10 @@
+<h2>Bohrprofil bearbeiten</h2>
+
+<form action="<?php echo ROOT_DIR ?>bohrprofil/update" id ="bohrprofil-form">
+
+    <input type="hidden" name="bohrprofil_id"
+           value="<?php echo $this->escape($this->bohrprofil['bohrprofil_id']) ?>" />
+
+    <?php echo $this->partial('bohrprofil/form-fields.phtml', $this); ?>
+
+</form>

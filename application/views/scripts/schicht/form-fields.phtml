@@ -1,0 +1,31 @@
+<tr>
+    <td>
+        <input type="hidden" name="schichten[<?php echo $this->index ?>][delete]"
+               value="<?php echo isset($this->schicht['delete']) ? $this->schicht['delete'] : '' ?>" />
+        <input type="hidden" name="schichten[<?php echo $this->index ?>][schicht_id]"
+               value="<?php echo $this->schicht['schicht_id'] ?>" />
+        <input type="text" style="width: 50px" name="schichten[<?php echo $this->index ?>][tiefe]"
+               value="<?php echo $this->escape($this->schicht['tiefe']) ?>" />
+    </td>
+    <td>
+        <?php echo $this->formSelect('schichten[' . $this->index . '][schichten_id]', $this->schicht['schichten_id'],
+                array('style' => 'width: 200px'), $this->schichtOptions); ?>
+    </td>
+    <td>
+        <input style="width: 250px" type="text" name="schichten[<?php echo $this->index ?>][bemerkung]"
+               value="<?php echo $this->escape($this->schicht['bemerkung']) ?>" />
+    </td>
+    <td>
+        <?php echo $this->formSelect('schichten[' . $this->index . '][quali]', $this->schicht['quali'],
+                array('style' => 'width: 100px'), $this->schichtQualiOptions); ?>
+    </td>
+    <td>
+        <input style="width: 250px" type="text" name="schichten[<?php echo $this->index ?>][qualibem]"
+               value="<?php echo $this->escape($this->schicht['qualibem']) ?>" />
+    </td>
+    <td>
+        <ul class="bodo-icons">
+            <li class="icon-remove bohrprofil-schichten-remove"></li>
+        </ul>
+    </td>
+</tr>

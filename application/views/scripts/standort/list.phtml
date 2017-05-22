@@ -1,0 +1,33 @@
+<?php if (empty($this->standorte)) { ?>
+<li>Keine Standorte gefunden.</li>
+<?php } else { ?>
+<?php foreach ($this->standorte as $standort) { ?>
+<li>
+    <h3><a href="<?php echo ROOT_DIR ?>standort/view?standort_id=<?php echo $standort['standort_id'] ?>">
+            Standort <?php echo $standort['standort_id'] ?>: <?php echo $standort['bezeichnung'] ?>
+    </a></h3>
+    <?php echo $this->partial('partial/new-mut.phtml', array(
+            'new_date' => $standort['new_date'],
+            'mut_date' => $standort['mut_date'],
+            'new_usr' => $standort['new_usr'],
+            'mut_usr' => $standort['mut_usr'],
+        )); ?>
+    <div style="margin-left: 10px;">
+        Anzahl Bohrlöcher: <?php echo empty($standort['anzbohrloch']) ? '-' : $standort['anzbohrloch'] ?> |
+        Gembfs: <?php echo empty($standort['gembfs']) ? '-' : $standort['gembfs'] ?> |
+        GB Nummer: <?php echo empty($standort['gbnummer']) ? '-' : $standort['gbnummer'] ?> |
+        GASO Nummer: <?php echo empty($standort['gaso_nr']) ? '-' : $standort['gaso_nr'] ?> |
+        Qualität: <?php echo empty($standort['quali']) ? '-' : $standort['quali'] ?>
+    </div>
+    <?php if (!empty($standort['qualibem'])) { ?>
+    <div style="margin-left: 10px;">
+        Bemerkung zur Qualität: <?php echo $standort['qualibem'] ?>
+    </div>
+    <?php } ?>
+    <?php if (!empty($standort['bemerkung'])) { ?>
+    <div style="margin-left: 10px;">
+        Bemerkung: <?php echo $standort['bemerkung'] ?>
+    </div>
+    <?php } ?>
+</li>
+<?php } } ?>

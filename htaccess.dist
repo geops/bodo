@@ -1,0 +1,25 @@
+RewriteEngine on
+
+RewriteBase /public
+
+# if a file exits - serve it
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l
+RewriteRule ^.*$ - [NC,L]
+
+
+# otherwise forward to index.php
+RewriteRule ^.*$ index.php [NC,L]
+
+
+#<FilesMatch "!\.(js|ico|gif|jpg|png|css|html)">
+#
+#</FilesMatch>
+
+# some expires headers to speed the application up
+# by reducing reloading of files
+#ExpiresActive On
+#ExpiresByType image/png "access plus 2 hours"
+#ExpiresByType image/jpeg "access plus 2 hours"
+#ExpiresByType text/css "access plus 2 hours"
+##ExpiresByType application/javascript "access plus 2 hours"
